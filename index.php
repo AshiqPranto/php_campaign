@@ -16,9 +16,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     // Decode the JSON payload into a PHP array
     $data = json_decode($jsonPayload, true);
 
-    print_r($data);
+    // print_r($data);
     
-    
+    if (json_last_error() === JSON_ERROR_NONE) {
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            if (isset($data['bidder_request']) && is_bool($data['bidder_request']) &&
+                isset($data['campaigns']) && is_array($data['campaigns'])) {
+        
+                // Proceed to store data in MongoDB
+                // MongoDB connection details
+                $mongoClient = new MongoDB\Client("mongodb://localhost:27017");
+                echo "mongodb connected successfully";
+                
+        
+            } else {
+                // Invalid JSON structure, return an error response
+                http_response_code(400);
+                echo json_encode(['error' => 'Invalid JSON structure']);
+                exit;
+            }
+        }
+    } 
+    else 
+    {
+        // Invalid JSON, return an error response
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid JSON']);
+        exit;
+    }
 }
 else 
 {
