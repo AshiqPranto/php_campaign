@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
                         // MySQL connection details
                         $mysqlHost = '127.0.0.1';
-                        $mysqlDb = 'bookstore';
+                        $mysqlDb = 'adplaytechnology';
                         $mysqlUser = 'pranto';
                         $mysqlPass = '';
 
